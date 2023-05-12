@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reclamation{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+    
+        <div class="card">
+            <div class="card-body">
+                    <h2 class="mb-3 text-primary" >Notre service s'améliore par vos réclamations</h2>
+                    <br>
+                    <h5 style="color: black; margin-left: 90px;">
+                        Vos notes seront bien traitées et votre identité est confidentielle.                        
+                    </h5>
+                    <br>
+    {{ include('reclamation/_form.html.twig') }}
+ <!--   <a href="{{ path('app_reclamation_index') }}">back to list</a> -->
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

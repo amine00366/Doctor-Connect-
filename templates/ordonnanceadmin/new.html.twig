@@ -1,0 +1,18 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Ordonnance{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80%">
+
+    <h1 class="mb-3 text-primary text-center my-105" >Create new Ordonnance</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+    {{ include('ordonnanceadmin/_form.html.twig') }}
+  
+    </div>
+  </div>   </div>
+    <a href="{{ path('app_ordonnanceadmin_index') }}">back to list</a>
+    </div>
+{% endblock %}

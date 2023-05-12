@@ -1,0 +1,15 @@
+{{ form_start(form,{'attr': {'novalidate':'novalidate'}} ) }}
+<div class="row text-center">
+<div class="col-md-6">
+<div class="form-group">
+ {{ form_label(form.etat,"état de traitement") }} 
+ {{ form_widget(form.etat, {'attr':{'class':'form-control'}})}} 
+ {{ form_errors(form.etat) }}
+
+</div>
+</div>
+
+</div>
+    <button class="btn btn-warning btn-lg" type="submit" name="submit" id="submit">{{ button_label|default('Envoyer') }} </button>
+
+{{ form_end(form) }}

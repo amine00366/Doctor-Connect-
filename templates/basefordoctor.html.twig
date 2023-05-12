@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.graygrids.com/themes/classix/modern/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Mar 2019 12:08:47 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DOC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/bootstrap.min.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/fonts/line-icons.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/slicknav.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/animate.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/owl.carousel.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/main.css")}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset("assets2/css/responsive.css")}}>
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+<header id="header-wrap">
+
+    <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+        <div class="container">
+            <div class="theme-header clearfix">
+
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="lni-menu"></span>
+                        <span class="lni-menu"></span>
+                        <span class="lni-menu"></span>
+                    </button>
+                    <a href="{{ path('app_home') }}" class="navbar-brand"><img src="assets2\img\doc.png" style="width: 80px;" alt=""></a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">  
+                    <ul class="navbar-nav mr-auto w-100 justify-content-left">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('app_home') }}">
+                                Home
+                            </a>
+                        </li>
+                   {% if (app.user)%}
+                        </li>
+                       
+                        <li class="nav-item">
+                        
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_ordonnance_index')}}">
+                                Ordonnance
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_meet',{'id': 1})}}">
+                                consultation
+                            </a>
+                        </li>
+                           
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_recherche', {'id': app.user.id})}}">
+                                Mes Rendez Vous
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_medicament_indexmeddoc')}}">
+                                Medicament
+                            </a>
+                        </li>
+                         
+                       
+                         {% endif %}
+                    </ul>
+                    <div class="header-top-right float-right">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_logout')}}" class="header-top-button"><i class="lni-lock"></i> Log Out</a>
+{% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                        <a href="{{path('app_login')}}" class="header-top-button"><i class="lni-lock"></i> Log In</a> |
+                        <a href="{{path('app_qui')}}" class="header-top-button"><i class="lni-pencil"></i> Register</a>
+                {% endif %}
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu" data-logo="assets2/img/logo-mobile.png"></div>
+    </nav>
+
+
+    <div id="hero-area">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-9 col-xs-12 text-center">
+                    <div class="contents">
+                        <h1 class="head-title">Welcome to Our Website <span class="year">DOC</span></h1>
+                       <p>Make your life easy with our help</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+{% endblock %}
+{% block body %}
+
+<section class="featured section-padding">
+<div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="heading">
+                        <h1 class="section-title">Regardez notre video présentative</h1>
+                        <div class="featured-box">
+                            <video width="640" height="360" controls>
+                            <source src="{{ asset('/assets2/video/video.mp4')}}" type="video/mp4">
+                            video is not available
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<div class="container" >
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="heading">
+                        <h1 class="section-title" >Pourquoi prendre rendez-vous avec DOC?</h1>
+                        <div class="featured-box">
+                <div class="homesection howsteps" style="background:#ffffff!important;text-align:center; ">
+                    <div class="pf-container">
+                        <h3 class="subtitle" style="color: orange;">Avec DOC, prenez rendez-vous en ligne avec votre médecin autrement</h3>
+                        <br><br>
+                        <div class="row">
+                            <div class="wpb_column col-lg-4 col-md-4 col-sm-4 col-xs-12 col-xss-12"><img src="https://cdn.med.tn/img/step1.svg" style="width:210px;height:175px;" alt="Accédez rapidement à votre médecin">
+                                <p>Accédez rapidement à votre médecin</p>
+                            </div>
+                            <div class="wpb_column col-lg-4 col-md-4 col-sm-4 col-xs-12 col-xss-12"><img src="https://cdn.med.tn/img/step2.svg" style="width:210px;height:175px;" alt="Prenez rendez-vous en ligne à tout moment">
+                                <p>Prenez rendez-vous en ligne à tout moment</p>
+                            </div>
+                            <div class="wpb_column col-lg-4 col-md-4 col-sm-4 col-xs-12 col-xss-12"><img src="https://cdn.med.tn/img/step3.svg" style="width:210px;height:175px;" alt="Recevez des sms/mail de rappel personnalisés">
+                                <p>Recevez des mails personnalisés</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+        
+        
+           
+
+
+
+
+                    </div>
+                </div>
+
+</section>
+
+
+
+
+<section class="works section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading">
+                    <h1 class="section-title">How It Works?</h1>
+                    <h4 class="sub-title">Discover & connect with top-rated local businesses</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="works-item">
+                    <div class="icon-box">
+                        <i class="lni-users"></i>
+                    </div>
+                    <p>Create an Account</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="works-item">
+                    <div class="icon-box">
+                        <i class="lni-bookmark-alt"></i>
+                    </div>
+                    <p>Publich your Post</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="works-item">
+                    <div class="icon-box">
+                        <i class="lni-thumbs-up"></i>
+                    </div>
+                    <p>Deal Done</p>
+                </div>
+            </div>
+            <hr class="works-line">
+        </div>
+    </div>
+</section>
+
+
+<section class="services bg-light section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading">
+                    <h1 class="section-title">Key Features</h1>
+                    <h4 class="sub-title">Find the best places</h4>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xs-12">
+                <div class="services-item wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="icon">
+                        <i class="lni-leaf"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">Elegant Design</a></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xs-12">
+                <div class="services-item wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="icon">
+                        <i class="lni-display"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">Responsive Design</a></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4 col-xs-12">
+                <div class="services-item wow fadeInRight" data-wow-delay="0.8s">
+                    <div class="icon">
+                        <i class="lni-emoji-smile"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">UX Friendly</a></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xs-12">
+                <div class="services-item wow fadeInRight" data-wow-delay="1s">
+                    <div class="icon">
+                        <i class="lni-pencil-alt"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">Easily Customizable</a></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xs-12">
+                <div class="services-item wow fadeInRight" data-wow-delay="1.2s">
+                    <div class="icon">
+                        <i class="lni-headphone-alt"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">Security Support</a></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<section class="subscribes section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="subscribes-inner">
+                    <div class="icon">
+                        <i class="lni-pointer"></i>
+                    </div>
+                    <div class="sub-text">
+                        <h3>Subscribe to Newsletter</h3>
+                        <p>and receive new ads in inbox</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="subscribe">
+                        <input class="form-control" name="EMAIL" placeholder="Enter your Email" required="" type="email">
+                        <button class="btn btn-common" type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block footer %}
+<footer style="width: 100%;">
+    <section class="footer-Content" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+                    <div class="widget">
+                        <div class="footer-logo"><img src="assets2\img\doc.png" style="width: 150px;" alt=""></div>
+                        <div class="textwidget">
+                            <p>Nous proposons une gamme complète de services de soins de santé, allant des consultations en ligne aux rendez-vous en personne. Notre mission est de fournir une expérience de soins de santé transparente et conviviale pour tous les patients. Nous sommes dévoués à offrir une qualité de soins exceptionnelle et à garantir la satisfaction de nos patients.</p>
+                        </div>
+                        <ul class="mt-3 footer-social">
+                            <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
+                            <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
+                            <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
+                            <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+                    <div class="widget">
+                        <h3 class="block-title">services</h3>
+                        <ul class="menu">
+                            <li><a href="#">- Posts</a></li>
+                            <li><a href="#">- Medicament</a></li>
+                            <li><a href="#">- Reclamation</a></li>
+                            <li><a href="#">- Doctor</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+                    <div class="widget">
+                        <h3 class="block-title">Contact Info</h3>
+                        <ul class="contact-footer">
+                            <li>
+                                <strong><i class="lni-phone"></i></strong><span>+1 555 444 66647 <br> +1 555 444 66647</span>
+                            </li>
+                            <li>
+                                <strong><i class="lni-envelope"></i></strong><span><a href="http://demo.graygrids.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7c4c8c9d3c6c4d3e7cac6cecb89c4c8ca">[email&#160;protected]</a> <br> <a href="http://demo.graygrids.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bac9cfcacad5c8cefad7dbd3d694d9d5d7">[email&#160;protected]</a></span>
+                            </li>
+                            <li>
+                                <strong><i class="lni-map-marker"></i></strong><span><a href="#">9870 St Vincent Place, Glasgow, DC 45 <br>Fr 45</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="site-info text-center">
+                        <p>Designed and developped by 404 ERROR GROUPE </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+{% endblock %}
+<a href="#" class="back-to-top">
+    <i class="lni-chevron-up"></i>
+</a>
+
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+{% block javascripts %}
+<script src={{asset("assets2/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js")}}></script>
+<script src={{asset("assets2/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js")}}></script>
+<script src={{asset("assets2/js/jquery-min.js")}}></script>
+<script src={{asset("assets2/js/popper.min.js")}}></script>
+<script src={{asset("assets2/js/bootstrap.min.js")}}></script>
+<script src={{asset("assets2/js/jquery.counterup.min.js")}}></script>
+<script src={{asset("assets2/js/waypoints.min.js")}}></script>
+<script src={{asset("assets2/js/wow.js")}}></script>
+<script src={{asset("assets2/js/owl.carousel.min.js")}}></script>
+<script src={{asset("assets2/js/jquery.slicknav.js")}}></script>
+<script src={{asset("assets2/js/main.js")}}></script>
+<script src={{asset("assets2/js/form-validator.min.js")}}></script>
+<script src={{asset("assets2/js/contact-form-script.min.js")}}></script>
+<script src={{asset("assets2/js/summernote.js")}}></script>
+{% endblock %}
+</body>
+
+</html>

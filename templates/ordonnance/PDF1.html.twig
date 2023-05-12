@@ -1,0 +1,31 @@
+
+          <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Ordonnance</h1> </div>
+ <div class="d-flex justify-content-center align-items-center">
+    <table class="table table-striped mx-auto">
+        <tbody>
+            <tr          {% for Ordonnance in Ordonnance %}>
+            <tr>
+                <th>Id  :</th>
+                <td>{{ Ordonnance.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Date_creation : </th>
+                <td>{{ Ordonnance.medicaments|join(' | ')}}</td>
+            </tr>
+            <tr>
+                <th>Frequence : </th>
+                <td>{{ Ordonnance.frequence }}</td>
+            </tr>
+            <tr>
+                <th>Dose : </th>
+                <td>{{ Ordonnance.dose }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation : </th>
+                <td>{{ Ordonnance.dateCreation ? Ordonnance.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tr >
+    {% endfor %}
+        </tbody>
+    </table>

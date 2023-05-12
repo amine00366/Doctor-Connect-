@@ -1,0 +1,42 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Ordonnance index{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80%">
+
+    <h1>Ordonnance index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Frequence</th>
+                <th>Dose</th>
+                <th>Date_creation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ordonnance in ordonnances %}
+            <tr>
+                <td>{{ ordonnance.id }}</td>
+                <td>{{ ordonnance.frequence }}</td>
+                <td>{{ ordonnance.dose }}</td>
+                <td>{{ ordonnance.dateCreation ? ordonnance.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_ordonnanceadmin_show', {'id': ordonnance.id}) }}">show</a>
+                    <a href="{{ path('app_ordonnanceadmin_edit', {'id': ordonnance.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ordonnanceadmin_new') }}">Create new</a>
+    </div>
+{% endblock %}

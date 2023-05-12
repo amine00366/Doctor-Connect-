@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Fiche{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80%">
+
+    <h1>Create new Fiche</h1>
+
+    {{ include('fiche_admin/_form.html.twig') }}
+
+    <a href="{{ path('app_fiche_admin_index') }}">back to list</a>
+    </div>
+{% endblock %}

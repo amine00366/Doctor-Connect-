@@ -1,0 +1,13 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier Medicament{% endblock %}
+
+{% block body %}
+<div style="margin-left:280px; width:80%;">
+    <h1>Modifier Medicament</h1>
+    {{ include('admin_medicament/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    <a href="{{ path('app_admin_medicament_index') }}">Retouner</a>
+
+    {{ include('admin_medicament/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

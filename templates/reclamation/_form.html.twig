@@ -1,0 +1,38 @@
+{{ form_start(form,{'attr': {'novalidate':'novalidate'}} ) }}
+<div class="row text-center">
+<div class="col-md-4">
+<div class="form-group">
+ {{ form_label(form.telephone,"Numéro de tél:") }} 
+ {{ form_widget(form.telephone, {'attr':{'class':'form-control'}})}} 
+ {{ form_errors(form.telephone) }}
+
+</div>
+</div>
+</div>
+<div class="row text-center">
+<div class="col-md-4">
+<div class="form-group">
+ {{ form_label(form.email,"adresse mail:") }} 
+ {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }} 
+ {{ form_errors(form.email) }}
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="form-group">
+ {{ form_label(form.id_tr,"Indiquer le type de votre réclamation") }} 
+ {{ form_widget(form.id_tr, {'attr':{'class':'form-control'}}) }} 
+{{ form_errors(form.id_tr) }}
+</div>
+</div>
+</div>
+<div class="col-md-10">
+<div class="form-group">
+ {{ form_label(form.cmnt,"Décrivez votre problème") }} 
+ {{ form_widget(form.cmnt, {'attr':{'class':'form-control'}})}} 
+ {{ form_errors(form.cmnt)}}
+</div>
+</div>
+    <button class="btn btn-warning btn-lg" type="submit" name="submit" id="submit">{{ button_label|default('Envoyer') }} </button>
+
+{{ form_end(form) }}

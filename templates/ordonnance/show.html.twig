@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ordonnance{% endblock %}
+
+{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        
+      }
+      
+       </style>
+{% endblock %}
+ 
+    <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Ordonnance</h1> </div>
+ <div class="d-flex justify-content-center align-items-center">
+    <table class="table table-striped mx-auto">
+        <tbody>
+            <tr>
+                <th>Id  :</th>
+                <td>{{ ordonnance.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Date_creation : </th>
+                {# <td>{{ ordonnance.medicaments|join(' | ')}}</td> #}
+            </tr>
+            <tr>
+                <th>Frequence : </th>
+                <td>{{ ordonnance.frequence }}</td>
+            </tr>
+            <tr>
+                <th>Dose : </th>
+                <td>{{ ordonnance.dose }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation : </th>
+                <td>{{ ordonnance.dateCreation ? ordonnance.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+ </div>
+     <a href="{{ path('app_ordonnance_index') }}">   Retourner à la liste </a>
+
+     
+    
+
+
+    {{ include('ordonnance/_delete_form.html.twig') }}
+   
+{% endblock %}

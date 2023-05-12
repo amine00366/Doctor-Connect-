@@ -1,0 +1,175 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="section-title">Lists of Posts !</h1>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+         <h4>Search A Post !!</h4>
+
+            <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"> Entities<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('search') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'posts') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+                                                        entitySelector.append('<li><b>'+value[1]+'</b><a href="detailed_post/'+id+'">'+'<img src="/assert2/img/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+<div class="post-container">
+            <div class="row">
+
+
+                    <section class="featured section-padding">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <div class="heading">
+                                        <h1 class="section-title">Latest Posts</h1>
+                                        <h4 class="sub-title">You can also post your own thoughts</h4>
+                                    </div>
+                                </div>
+
+                                {% for posts in posts %}
+                                
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="homes-tag featured">Blog</div>
+                                            <div class="homes-tag rent"><i class="lni-heart"></i> 202</div>
+
+                                            <a href="{{ path('detailed_post',{'id': posts.id}) }}"><img class="img-fluid" src="{{ asset('assert2/img/' ~ posts.photo) }}" alt=""></a>
+                                        </figure>
+                                        <div class="content-wrapper">
+                                            <div class="feature-content">
+                                                <h4><a href="{{ path('detailed_post',{'id': posts.id}) }}">{{ posts.title }}</a></h4>
+                                                <p class="listing-tagline">{{ posts.description|trim }}</p>
+                                                <div class="meta-tag">
+                                                    <div class="listing-review">
+                                                        <span class="review-avg">4.5</span>
+                                                        2 Ratings
+                                                    </div>
+                                                    <div class="user-name">
+                                                        <a href="#"><i class="lni-user"></i>{{ posts.Creator().getUsername() }}</a>
+                                                    </div>
+                                                    <div class="listing-category">
+                                                        <a href="#"><i class="lni-alarm-clock"></i>{{ posts.postdate|date() }} </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="listing-bottom clearfix">
+                                                <div class="btn-group">
+                        {% if(posts.creator.id == app.user.id) %}
+
+                                                    <a href="{{ path('update_post',{'id': posts.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                    <a href="{{ path('delete_post',{'id': posts.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                                {% endif %}
+                                                    <a href="{{ path('detailed_post',{'id': posts.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+                                                </div> 
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    </section>
+
+
+
+            </div>
+
+        </div>
+<style>
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+    }
+    
+
+    .pagination-ellipsis {
+        margin: 0 5px;
+        font-size: 1.5rem;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .pagination-link {
+            padding: 5px;
+            font-size: 1rem;
+        }
+        
+        .pagination-ellipsis {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+
+<div class="pagination-container pagination-link pagination-ellipsis">
+    {{ knp_pagination_render(posts) }}
+</div>
+
+    </div>
+    
+    </div>
+    
+{% endblock %}
+

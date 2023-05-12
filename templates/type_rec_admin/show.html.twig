@@ -1,0 +1,22 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}TypeReclamation{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80% ">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ type_reclamation.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_type_rec_admin_index') }}">back to list</a>
+
+    <a class="btn btn-warning" href="{{ path('app_type_rec_admin_edit', {'id': type_reclamation.id}) }}">edit</a>
+
+    {{ include('type_rec_admin/_delete_form.html.twig') }}
+</div>
+{% endblock %}

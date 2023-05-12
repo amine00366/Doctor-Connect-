@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h1 class="text-center">Edit Doctor</h1>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-center mb-3">
+            {{ include('doctor/_form.html.twig', {'button_label': 'Update'}) }}
+          </div>
+          <div class="d-flex justify-content-between">
+            <a href="{{ path('app_doctor_index') }}" class="btn btn-success">
+              <i class="fa fa-arrow-left"></i>
+              <span class="ml-2">Go Back</span>
+            </a>
+            {{ include('doctor/_delete_form.html.twig') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

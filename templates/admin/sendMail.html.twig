@@ -1,0 +1,76 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}send mail{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80% ">
+
+    <div class="db-info-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="dashboard-box">
+
+                    <br/>
+
+                    <h4>send email</h4>
+                    <div class="form-group">
+
+                        <span id="instructions" style="color: red"></span>
+
+
+                    </div>
+                    {{ form_start(form, {'attr': {'id': 'mon-formulaire'}}) }}
+                    <div class="form-group">
+
+                        <label> users addresse </label>
+                        <input required="" value={{ user_email}} class="form-control"
+                               name="email" readonly>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        {{ form_row(form.subject) }}
+
+                    </div>
+                    <div class="form-group">
+
+                        {{ form_row(form.message , { 'id': 'textarea' }) }}
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class=" btn-danger" name="sendMailToUser">send mail
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+
+
+                    <button id="clear" class="btn btn-danger btn-block">Clear Text</button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+    document.getElementById("clear").addEventListener("click", function() {
+  document.getElementById("mon-formulaire").reset();
+});
+    </script>
+    <script>
+    var form = document.querySelector('#mon-formulaire');
+    var submitButton = form.querySelector('button[type=submit]');
+
+    form.addEventListener('submit', function (event) {
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Envoi en cours...';
+    });
+</script>
+
+    {% endblock %}

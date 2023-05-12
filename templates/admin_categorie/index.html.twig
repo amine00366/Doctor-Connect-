@@ -1,0 +1,33 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+<div class="b" style="margin-left:20%;">
+    <h1>Liste des Categories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.nom }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune Categorie</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_admin_categorie_new') }}">Ajouter</a>
+</div>
+{% endblock %}

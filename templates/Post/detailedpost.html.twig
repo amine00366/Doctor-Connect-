@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h1 class="mt-4">{{ title|upper }}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+
+                    <a href="{{ path('list_post') }}">Home</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>{{ date|date }}</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" src="{{ asset('assert2/img/' ~ posts.photo)  }}" alt="{{ title }}">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{ descripion }}</p>
+
+
+
+                <hr>
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+    {{ form_widget(form.content,{'attr':{'type':'textarea','class':'form-control','placeholder':'Description...'}}) }}
+
+    <button type="submit" class="btn">comment</button>
+
+    {{ form_end(form) }}
+                    </div>
+                </div>
+
+                <!-- Single Comment -->
+                {% for comment in posts.comments %}
+                    {% if comment.isApproved %}
+
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                           {% if(comment.doctoruser is null) %}
+
+                        {% if(comment.user.id == app.user.id) %}
+                        <h5 class="mt-0">
+                    
+                        {{ comment.getUser().getNom() }}</h5>
+                        {% endif %}
+                         {% endif %}
+                         {% if(comment.user is null) %}
+
+                        {% if(comment.doctoruser.id == app.user.id) %}
+                        {{ comment.getdoctoruser().getNom() }}</h5>
+                        {% endif %}
+                         {% endif %}
+
+<p>{{ comment.getContent() }}</p>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if(comment.doctoruser is null) %}
+                            {% if(comment.user.id == app.user.id) %}
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                               Delete
+                            </button>
+                            {% endif %}
+                            {% endif %}
+                              {% if(comment.user is null) %}
+                            {% if(comment.doctoruser.id == app.user.id) %}
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                               Delete
+                            </button>
+                            {% endif %}
+                            {% endif %}
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Alert </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                         Do you really want to delete your comment ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="{{ path('delete_comment',{'id': comment.id}) }}"><button type="button" class="btn btn-primary">Delete Comment</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                          
+                        {% elseif not(comment.isApproved) %}
+                        <div></div>
+                        {% endif %}
+                      
+
+                        {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                        <br>
+
+                        {% endif %}
+                   </div>
+<br><br> <br> <br><br> <br>
+
+{% endfor %}
+                <!-- Comment with nested comments -->
+
+
+            </div>
+          
+        <!-- /.row -->
+</div></div>
+</div>
+    <!-- /.container -->
+
+{% endblock %}

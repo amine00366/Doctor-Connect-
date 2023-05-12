@@ -1,0 +1,31 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Medicament{% endblock %}
+
+{% block body %}
+<div style="margin-left:280px; width:80%;">
+    <h1 class="text text-primary" style="text-align: center;">{{ medicament.nom }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Image</th>
+                <td style="border:0px;"><img style="width:100px" src="{{ asset('assert2/img/' ~ medicament.image) }}" class="card-img-top" alt=""></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td style="border:0px;">{{ medicament.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td style="border:0px;">{{ medicament.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a  class="btn btn-primary"  href="{{ path('app_admin_medicament_index') }}">Retourner</a>
+
+    <a class="btn btn-primary" href="{{ path('app_admin_medicament_edit', {'id': medicament.id}) }}">Modifier</a>
+    {{ include('admin_medicament/_delete_form.html.twig') }}
+</div>
+{% endblock %}

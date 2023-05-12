@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+{% block body %}
+<h1 class="text-center my-5">Utilisateur</h1>
+<div class="container"> 
+<center>
+<table class="table mx-auto">
+    <tbody>
+           
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ user.Cin }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ user.Age }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+           
+            {# <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr> #}
+            
+        </tbody>
+</table>
+
+
+<div class="d-flex justify-content-center my-5">
+    {# <a href="{{ path('app_user_index', {'id': user.id}) }}" class="btn btn-success btn-icon-split mx-2">
+        <span class="text">go to back</span>
+    </a> #}
+     <a href="{{ path('routeforuser') }}" class="btn btn-success btn-icon-split mx-2">
+        <span class="text">go to back</span>
+    </a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-success btn-icon-split mx-2">
+        <span class="text">edit</span>
+    </a>
+</div>
+</center>
+</div>
+{{ include('user/delete.html.twig') }}
+{% endblock %}

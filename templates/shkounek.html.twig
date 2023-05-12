@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .image {
+    height: 200px;
+    margin-bottom: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+</style>
+
+<div class="container">
+  <div class="image">
+    <a href="{{path('doctor_add')}}" style="text-decoration: none;">
+      <img src="images.png">
+    </a>
+    Doctor
+  </div>
+  <div class="image">
+    <a href="{{path('app_register')}}" style="text-decoration: none;">
+      <img src="download.png">
+    </a>
+    Patient
+  </div>
+</div>
+
+{% endblock %}

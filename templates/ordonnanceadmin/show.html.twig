@@ -1,0 +1,37 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Ordonnance{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80%">
+
+    <h1>Ordonnance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ordonnance.id }}</td>
+            </tr>
+            <tr>
+                <th>Frequence</th>
+                <td>{{ ordonnance.frequence }}</td>
+            </tr>
+            <tr>
+                <th>Dose</th>
+                <td>{{ ordonnance.dose }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ ordonnance.dateCreation ? ordonnance.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ordonnanceadmin_index') }}">back to list</a>
+
+    <a href="{{ path('app_ordonnanceadmin_edit', {'id': ordonnance.id}) }}">edit</a>
+
+    {{ include('ordonnanceadmin/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

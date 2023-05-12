@@ -1,0 +1,44 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Fiche{% endblock %}
+
+{% block body %}
+  {% block stylesheets %}
+    {{ parent() }}
+    <style>
+     .container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+table {
+  width: 20%;
+}
+
+      
+       </style>
+{% endblock %}
+<div style="margin-left: 280px; width: 80%">
+     <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Fiche Patient</h1> </div>
+<div class="container">
+    <table class="table table-striped mx-auto">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fiche.id }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ fiche.note }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fiche_admin_index') }}">back to list</a>
+
+    <a href="{{ path('app_fiche_admin_edit', {'id': fiche.id}) }}">edit</a>
+
+    {{ include('fiche_admin/_delete_form.html.twig') }}
+    </div>
+    </div>
+{% endblock %}

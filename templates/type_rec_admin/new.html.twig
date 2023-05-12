@@ -1,0 +1,11 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New TypeReclamation{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80% ">
+    {{ include('type_rec_admin/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('app_type_rec_admin_index') }}">back to list</a>
+</div>
+{% endblock %}

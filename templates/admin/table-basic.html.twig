@@ -1,0 +1,119 @@
+{% extends 'admin.html.twig' %}
+{% block body %}
+
+    
+
+                    <ul class="navbar-nav w-100" style="margin-top: 18px;">
+                        <li class="nav-item w-100">
+                            <form name="Search-method" id="Search-method"method="post" class="forms-sample" style="margin-left: 300px;">
+                                <div class="form-group col-md-5">
+                                    <label style="margin-top: 11px;margin-left: 10px;margin-right: 14px;padding-bottom: 7px;;">Option Recherche</label>
+                                    <select name="optionsearch" class="js-example-basic-single" style="width: 200px;height: 38px; color: white; background-color: #191c24; border-radius: 4px;text-align: center;border: 2px solid #0090e7;margin-right: 15px;">
+                                        <option value="">Choisi un Critére</option>
+                                        <option value="title">title</option>
+                                        <input name="Search" type="text" class="form-control" placeholder="Search Events" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-primary" type="Submit">Search</button>
+                                    </select>
+                                </div>
+                             
+                            </form>
+                        </li>
+                    </ul>
+<div class="page-wrapper">
+         
+            <div class="container-fluid">
+               
+                <div class="row page-titles">
+                   
+                    <div class="col-md-7 align-self-center">
+                        
+                    </div>
+                </div>
+               
+                <div class="row">
+                   
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                                <h4 class="card-title">table des Posts</h4>
+                                
+                               
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                
+                                                <th>Id</th>
+                                                <th>title</th>
+                                                <th>Description</th>
+                                                 <th>Actions</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        {% for posts in posts %}
+                                        <tbody>
+                                            <tr> 
+                                                <a href={{ path('app_appointments',{'id': app.user.id}) }} ><button type="button" class="btn btn-sm btn-outline-danger">Retour au liste</button></a>
+
+                                                <td>{{ posts.id }}</td>
+                                                <td>{{ posts.title }}</td>
+                                                <td>{{ posts.description }}</td>
+                                                <td>
+                                               <a href="{{ path('delete_post', {'id': posts.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">delete</button></a>
+                                               <hr>
+                                                </td>
+                                                
+                                            </tr>
+
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                    <div class="row ">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div style="display: flex">
+                        <div class="col-md-5">
+                        </div>
+                        <form method="post" class="forms-sample" style="margin-left: -42px" >
+                            <div class="form-group col-md-4" style="margin-right: 500px;">
+
+                                <div class="form-check">
+                                    <label class="form-check-label" style="width: 92px;margin-left: -2px;margin-right: 10px;">
+                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="title">title</label>
+                                </div>
+                              <div class="form-check">
+                                    <label class="form-check-label" style="width: 92px;margin-left: -2px;margin-right: 10px;">
+                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="id">id</label>
+                                </div>
+                              <div class="form-check">
+                                    <label class="form-check-label" style="width: 92px;margin-left: -2px;margin-right: 10px;">
+                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="dispovh">description</label>
+                                </div>
+                            
+                                </div>
+
+                                <button type="Submit" class="btn btn-success btn-fw" style="margin: auto; ">Sort</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+       
+            
+           
+        </div>
+{% endblock %}
+
+

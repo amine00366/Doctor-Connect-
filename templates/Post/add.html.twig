@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+   <center><h2 class="contact-title">
+        <br><br>
+      Ask your Question!
+    </h2></center>
+ <br> <br>
+
+<style>
+label {
+  font-weight: bold;
+  color:Blue sky;
+  text-transform: uppercase;
+}
+
+</style>
+
+<div class="page-wrapper">
+<div class="container-fluid">
+
+<div class="row">
+
+<div class="container">
+
+    {{ form_start(Form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <center>
+        <style>
+            table {
+                margin-top: 50px;
+                margin-right: -40px;
+            }
+        </style>
+        <div>
+            <table>
+                 <div class="form-floating mb-3">
+              {{ form_widget(Form.title, {'attr': {'class': 'form-control', 'placeholder': 'YOUR TITLE'}}) }}
+              {{ form_errors(Form.title) }}
+            </div>
+
+            <div class="form-floating mb-3">
+              {{ form_widget(Form.description, {'attr': {'class': 'form-control', 'placeholder': 'Describe your problem'}}) }}
+              {{ form_errors(Form.description) }}
+              {{ form_label(Form.description, "Describe your question", {'label_attr': {'class': 'small mb-1'}}) }}
+            </div>
+            <div class="form-floating mb-3">
+
+            {{ form_widget(Form.photo,{'attr':{'type':'text','class':'form-control','placeholder':'photo...'}}) }}
+</div>
+            </table>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Remove flash messages after 5 seconds
+    setTimeout(function() {
+        $('.alert-success').fadeOut('slow', function() {
+            // Remove message from session once it has been displayed
+            $(this).remove();
+        });
+    }, 1000);
+});
+</script>
+ {% for message in app.session.flashbag.get('success') %}
+    <div class="alert alert-success message">{{ message }}</div>
+{% endfor %}
+
+<style>
+.message {
+    animation: fade-out 5s ease-in-out;
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+</style>
+
+
+
+
+
+    </center>
+    
+    
+         <div class="d-grid" ><button  class="btn btn-primary mt-3" type="submit">{{ button_success|default('save') }}</button></div>
+    </div>
+    {{ form_end(Form) }}
+    </div>
+    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+        <br><br><br>
+
+        <div class="alert alert-warning" role="alert">
+            <h3>
+               In order to post in our blog you need to be connected, if you are not
+                you can join us by clicking <a href="{{ path('app_login') }}">HERE</a>
+                Or if you already have an account click <a href="{{ path('app_logout') }}" >HERE</a> to connect !
+            </h3>
+
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Ajouter un médicament</div>
+        <div class="card-body">
+          {{ form_start(form) }}
+
+          <div class="form-group">
+            {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nom) }}
+          </div>
+
+          <div class="form-group">
+            {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+          </div>
+
+          <div class="form-group">
+            {{ form_row(form.image, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.image) }}
+          </div>
+
+          <div class="form-group">
+            {{ form_row(form.prix, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.prix) }}
+          </div>
+
+          <div class="form-group">
+            {{ form_row(form.id_categorie, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.id_categorie) }}
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

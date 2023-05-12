@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Uupdate Your Post !!</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form.content,{'attr':{'type':'textarea','class':'form-control','placeholder':'Description...'}}) }}
+
+    <button type="submit" class="btn">comment</button>
+
+    {{ form_end(form) }}
+{% endblock %}

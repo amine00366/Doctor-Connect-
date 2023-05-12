@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos Reclamation{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Consulter vos Reclamations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Cmnt</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reclamation.email }}</td>
+                <td>{{ reclamation.telephone }}</td>
+                <td>{{ reclamation.cmnt }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+
+    <a class="btn btn-danger" href="{{ path('app_reclamation_new') }}">Create new</a>
+    </div>
+{% endblock %}

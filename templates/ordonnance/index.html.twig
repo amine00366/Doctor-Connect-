@@ -1,0 +1,50 @@
+{% extends 'basefordoctor.html.twig' %}
+
+{% block title %}Ordonnance index{% endblock %}
+
+{% block body %}
+      <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Liste Ordonnances</h1> </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Frequence (Fois/Jours)</th>
+                <th>Dose (en mg)</th>
+                <th>Consultation</th>
+                <th>Medecin</th>
+                <th>Patient</th>
+                {# <th>Médicaments</th> #}
+                <th>Date_creation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ordonnance in ordonnances %}
+            <tr>
+               
+                <td>{{ ordonnance.frequence }}</td>
+                <td>{{ ordonnance.dose }}</td>
+                 <td>{{ ordonnance.getIdConsultation().getEtatConsultation()}}</td> 
+                <td>{{ ordonnance.getIdConsultation().getIdMedcin()}}</td>
+                <td>{{ ordonnance.getIdConsultation().getIdUser()}}</td>
+                {# <td>{{ ordonnance.getNomMedicament()}}</td> #}
+                <td>{{ ordonnance.dateCreation ? ordonnance.dateCreation|date('Y-m-d ') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_ordonnance_show', {'id': ordonnance.id}) }}">SHOW</a>
+                    <a href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">EDIT</a>
+    <a href="{{ path('app_ordonnance_imprimmaison', {'id':ordonnance.id}) }}">PDF</a>
+             
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+       
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ordonnance_new') }}">Create new</a>
+    
+{% endblock %}

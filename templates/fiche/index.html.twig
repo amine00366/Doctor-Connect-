@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+{% endblock %}
+{% block title %}Fiches{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $('#search-input').on('input', function() {
+                var query = $(this).val(); 
+                $.get('{{ url('fiche_search') }}', { q: query }, function(results) {
+                    var $resultsList = $('#search-results');
+                    $resultsList.empty();
+                    $.each(results, function(i, result) {
+                        var $li = $('<li>').text(result.note);
+                        $resultsList.append($li);
+                    });
+                });
+            });
+        });
+    </script>
+    {% endblock %}
+    {% block body %}
+
+
+
+    <h1>Fiche index</h1>
+<div class="col-md-2"> <input type="text" id="search-input" name="q" onfocus="placeholder='chercher'">
+    <ul id="search-results">
+    </ul>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Note</th>
+                  <th>Id Consultation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td>{{ fiche.id }}</td>
+                <td>{{ fiche.note }}</td>
+                  <td>{{ fiche.IdConsultation}}</td>
+                <td>
+                    <a href="{{ path('app_fiche_show', {'id': fiche.id}) }}">show</a>
+                    <a href="{{ path('app_fiche_edit', {'id': fiche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fiche_new') }}">Create new</a>
+     <div class="pagination">
+                            <style>
+                                .pagination {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .pagination a,
+                                .pagination span {
+                                    padding: 5px 10px;
+                                    margin: 0 5px;
+                                    border-radius: 5px;
+                                    text-decoration: none;
+                                    color: #333;
+                                    background-color: #f1f1f1;
+                                    border: 1px solid #ccc;
+                                }
+
+                                .pagination .active a,
+                                .pagination a:hover {
+                                    background-color: #333;
+                                    color: #fff;
+                                    border-color: #333;
+                                }
+                            </style>
+                                {{ knp_pagination_render(fiches) }}
+                        </div>
+{% endblock %}

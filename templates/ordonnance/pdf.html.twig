@@ -1,0 +1,34 @@
+      <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">ordonnance</h1> </div>
+ <div class="d-flex justify-content-center align-items-center">
+    <table class="table table-striped mx-auto">
+        <tbody>
+            <tr>
+
+               <tr>
+                <th>Id  :</th>
+                <td>{{ ordonnance.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Date_creation : </th>
+                <td>{{ ordonnance.medicaments|join(' | ')}}</td>
+            </tr>
+            <tr>
+                <th>Frequence : </th>
+                <td>{{ ordonnance.frequence }}</td>
+            </tr>
+            <tr>
+                <th>Dose : </th>
+                <td>{{ ordonnance.dose }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation : </th>
+                <td>{{ ordonnance.dateCreation ? ordonnance.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+    
+</tr>
+
+        </tbody>
+    </table>
+   

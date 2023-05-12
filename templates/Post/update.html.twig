@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+ {% block body %}
+ <br> <br>
+
+<style>
+label {
+  font-weight: bold;
+  color:Blue sky;
+  text-transform: uppercase;
+}
+
+</style>
+
+<div class="page-wrapper">
+<div class="container-fluid">
+
+<div class="row">
+
+<div class="container">
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <center>
+        <style>
+            table {
+                margin-top: 50px;
+                margin-right: -40px;
+            }
+        </style>
+        <div>
+            <table>
+                 <div class="form-floating mb-3">
+              {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Nom du type'}}) }}
+              {{ form_errors(form.title) }}
+              {{ form_label(form.title, "Nom du categories", {'label_attr': {'class': 'small mb-1'}}) }}
+            </div>
+
+            <div class="form-floating mb-3">
+              {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Nom du type'}}) }}
+              {{ form_errors(form.description) }}
+              {{ form_label(form.description, "Nom du categories", {'label_attr': {'class': 'small mb-1'}}) }}
+            </div>
+            <div class="form-floating mb-3">
+
+            {{ form_widget(form.photo,{'attr':{'type':'text','class':'form-control','placeholder':'photo...'}}) }}
+</div>
+            </table>
+        </div>
+    </center>
+    
+    
+         <div class="d-grid" ><button  class="btn btn-primary mt-3" type="submit">{{ button_success|default('update') }}</button></div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+    </div>
+    </div>
+{% endblock %}

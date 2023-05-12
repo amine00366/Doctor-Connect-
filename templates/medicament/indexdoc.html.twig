@@ -1,0 +1,57 @@
+{% extends 'basefordoctor.html.twig' %}
+{% block stylesheet %}
+   
+{% endblock %}
+{% block title %}Medicament index{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $('#search-input').on('input', function() {
+                var query = $(this).val(); 
+                $.get('{{ url('medicament_search') }}', { q: query }, function(results) {
+                    var $resultsList = $('#search-results');
+                    $resultsList.empty();
+                    $.each(results, function(i, result) {
+                        var $li = $('<li>').text(result.nom).click(function() {
+                        window.location.href = '{{ path('app_medicament_show', {'id': '_ID_'}) }}'.replace('_ID_', result.id);
+                        });;
+                        $resultsList.append($li);
+                    });
+                });
+            });
+        });
+    </script>
+{% endblock %}
+{% block body %}
+<div class="row" style="margin-top:1%;">
+    <div class="col-md-6"> <h1 class="text text-primary" style="text-align:center;">Liste des Medicaments</h1></div>
+     <div class="col-md-2"> <input type="text" id="search-input" name="q" onfocus="placeholder='chercher'">
+    <ul id="search-results">
+    </ul>
+    </div>
+    <div class="col-md-2">
+    <form action="{{ path('app_medicament_filtrer') }}" method="post">
+    <div class="row">
+    <label class="text text-primary">Categorie</label>
+    </div>
+    <select name="category" id="category"  class="form-select" aria-label="Default select example" style="width: 200px;">
+        <option value="0">Tous</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.nom }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-info" type="submit">Filtrer</button>
+</form>
+    </div>
+     {% for medicament in medicaments %}
+    <div class="card" style="width: 18rem; margin-left:5%;">
+  <img src="C:\Users\MSI\Desktop\PiImage\645b9b1bae758.png" class="card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title"> {{ medicament.nom }}</h5>
+    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}" class="btn btn-primary">Voir</a>
+  </div>
+</div>
+  {% endfor %}
+{% endblock %}

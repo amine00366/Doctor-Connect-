@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medicament{% endblock %}
+
+{% block body %}
+    <h1 style="text-align:center;">{{ medicament.nom }}</h1>
+
+    <table class="table">
+        <tbody>
+             <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('assert2/img/' ~ medicament.image|slice(10)) }}" class="card-img-top" alt="" style="width:224px; heigth:224px;"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ medicament.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ medicament.prix }}DNT</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" style="margin-left:45% ;"href="{{ path('app_medicament_index') }}">Retourner</a>
+{% endblock %}

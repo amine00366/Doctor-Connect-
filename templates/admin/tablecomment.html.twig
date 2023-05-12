@@ -1,0 +1,86 @@
+{% extends 'admin.html.twig' %}
+{% block body %}
+<div class="page-wrapper">
+         
+            <div class="container-fluid">
+               
+                <div class="row page-titles">
+                   
+                    <div class="col-md-7 align-self-center">
+                        
+                    </div>
+                </div>
+               
+                <div class="row">
+                   
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                                <h4 class="card-title">table des Comment</h4>
+                                
+                               
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                
+                                                <th>Id</th>
+                                                <th>delete</th>
+                                                <th>approve</th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                        {% for comment in comments %}
+                                        <tbody>
+                                            <tr> 
+                                                <td>{{ comment.content }}</td>                                              
+                                                <td>
+                                               <a href="{{ path('delete_commentadmin', {'id': comment.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">delete</button></a>
+                                               <hr>
+                                                </td>
+                                                <td>
+                                                         {% if not comment.isApproved() %}
+            <button class="approve-button btn btn-sm btn-outline-primary " data-comment-id="{{ comment.getId() }}" onclick="refreshPage()">Approve</button>
+
+        {% endif %}
+                                                </td>
+                                                
+                                            </tr>
+ 
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+            
+           
+        </div>
+              <script>
+    const approveButtons = document.querySelectorAll('.approve-button');
+    approveButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const commentId = button.dataset.commentId;
+            fetch(`/Post/admin/postcomments/approve/${commentId}`)
+                .then(response => response.json())
+                .then(() => {
+                    // Reload the page to show the updated comments
+                    location.reload();
+                })
+                .catch(error => console.error(error));
+        });
+  
+    });
+       function refreshPage() {
+    // Rafraîchir la page
+          window.location.href = window.location.href;
+    }
+</script>
+{% endblock %}

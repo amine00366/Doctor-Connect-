@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>User Index</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" class="form-inline mb-4">
+                    <div class="form-group mr-2">
+                        <label for="optionsearch" class="mr-2">Option Recherche</label>
+                        <select name="optionsearch" id="optionsearch" class="form-control">
+                            <option value="">Choisi un Critére</option>
+                            <option value="Nom">Nom</option>
+                            <option value="Preom">Preom</option>
+                            <option value="Age">Age</option>
+                        </select>
+                    </div>
+                    <div class="form-group mr-2">
+                        <input type="text" name="Search" class="form-control" placeholder="Search Events">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="sortOption">Sort By</label>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="sortOption" id="sortOptionId" value="id">
+                            <label class="form-check-label" for="sortOptionId">ID</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
+            </div>
+        </div>
+<table class="table">
+    <thead>
+        <tr>
+       
+            <th style="width: 20%;">Nom</th>
+            <th style="width: 20%;">Prenom</th>
+            <th style="width: 20%;">Adresse</th>
+            <th style="width: 20%;">Cin</th>
+            <th style="width: 20%;">Age</th>
+            <th style="width: 25%;">Email</th>
+            <th style="width: 10%;">Password</th>
+            <th style="width: 15%;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set name_stats = {} %}
+        {% for user in users %}
+            <tr>
+                
+                <td class="text-nowrap">{{ user.Nom }}</td>
+                <td class="text-nowrap">{{ user.Prenom}}</td>
+                 <td class="text-nowrap">{{ user.Adresse}}</td>
+                 <td class="text-nowrap">{{ user.Cin}}</td>
+                  <td class="text-nowrap">{{ user.Age}}</td>
+                <td class="text-nowrap">{{ user.email}}</td>
+                <td class="text-nowrap">****</td>
+                <td>
+                    <div class="my-2"></div><a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-success btn-icon-split"><span class="text">show</span></a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">edit</a>
+                </td>
+            </tr>
+            {% set name_count = name_stats[user.Nom] is defined ? name_stats[user.Nom] + 1 : 1 %}
+            {% set name_stats = name_stats|merge({(user.Nom): name_count}) %}
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Pation Statistics</h2>
+<div class="d-flex align-items-center justify-content-center" style="height: 20px;"> </div>
+<table class="table" style="width:80PX">
+    <thead>
+        <tr>
+            <th>How many patient</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for roleperm, count in name_stats %}
+        <tr>
+            <td>{{ roleperm }}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('app_register') }}" class="btn btn-danger">Create new</a>
+
+</center>
+
+    
+  
+
+{% endblock %}

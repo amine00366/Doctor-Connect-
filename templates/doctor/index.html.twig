@@ -1,0 +1,88 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Doctor index{% endblock %}
+
+{% block body %}
+    <h2>Doctor index</h2>
+     <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" class="form-inline mb-4">
+                    <div class="form-group mr-2">
+                        <label for="optionsearch" class="mr-2">Option Recherche</label>
+                        <select name="optionsearch" id="optionsearch" class="form-control">
+                            <option value="">Choisi un Critére</option>
+                            <option value="Specialite">Specialite</option>
+                        </select>
+                    </div>
+                    <div class="form-group mr-2">
+                        <input type="text" name="Search" class="form-control" placeholder="Search Events">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="sortOption">Sort By</label>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="sortOption" id="sortOptionId" value="id">
+                            <label class="form-check-label" for="sortOptionId">ID</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
+            </div>
+        </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                
+            <th style="width: 20%;">Nom</th>
+            <th style="width: 20%;">Prenom</th>
+            <th style="width: 20%;">Adresse</th>
+            <th style="width: 20%;">Cin</th>
+            <th style="width: 20%;">Age</th>
+            <th style="width: 25%;">Email</th>
+           
+            <th style="width: 15%;">Specialite</th>
+            <th style="width: 15%;">Diplome</th>
+               
+               <th style="width: 15%;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+         {% set name_stats = {} %}
+        {% for doctor in doctors %}
+         <tr>
+            
+                <td class="text-nowrap">{{ doctor.Nom }}</td>
+                <td class="text-nowrap">{{ doctor.Prenom}}</td>
+                 <td class="text-nowrap">{{ doctor.Adresse}}</td>
+                 <td class="text-nowrap">{{ doctor.Cin}}</td>
+                  <td class="text-nowrap">{{ doctor.Age}}</td>
+                <td class="text-nowrap">{{ doctor.email}}</td>
+                
+                <td class="text-nowrap">{{ doctor.Specialite}}</td>
+                <td class="text-nowrap">{{ doctor.Diplome }}</td>
+
+                <td>
+                    <div class="my-2"></div><a href="{{ path('app_doctor_show', {'id': doctor.id}) }}" class="btn btn-success btn-icon-split"><span class="text">show</span></a>
+     
+                </td>
+            </tr>
+        
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_doctor_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+<div style="margin-left: 280px; width: 80% ">
+{% for message in app.flashes('notification') %}
+        <div class="alert alert-warning alert-dismissible fade show" style="width:40%">
+        <i class="fa fa-bell-o"></i>
+           {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    {% endfor %}
+    <table style="border:0px;">
+    <td>
+        <div style="width:400px;">
+    <h5 style="color:blue;">nombre Total des reclamations :<h4> {{ nbr }}</h4> </h5>
+    <h5 style="color:red;">nombre total des reclamation en cours :<h4> {{ nbc }}</h4></h5>
+    <h5 style="color:green;">nombre total des reclamation en traité :<h4> {{ nbtr }}</h4></h5>
+    </div>
+    </td>
+    <td>
+    <div style="width:400px;">
+       <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <h2 style="color: #FF00FF;">Statistiques reclamations par types</h2>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for r in res %}
+                        '{{ r.type }}',
+                    {% endfor %}
+                ],
+                datasets: [{
+                    label: 'Types des reclamation',
+                    data: [
+                        {% for item in res %}
+                            {{ item.nb }},
+                        {% endfor %}
+                    ],
+                   chart: {
+                        type: 'bar',
+                        toolbar: {
+                            show: true
+                        }
+                    },
+                }]
+            },
+            options: {}
+        });
+    </script>
+    </td>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Cmnt</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody> 
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reclamation.email }}</td>
+                <td>{{ reclamation.telephone }}</td>
+                <td>{{ reclamation.cmnt }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_rec_admin_show', {'id': reclamation.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_rec_admin_edit', {'id': reclamation.id}) }}">edit</a>
+                    <a class="btn btn-danger" href="{{ path('sendMailToUser', {'id': reclamation.id}) }}">Traiter</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ </div>   
+{% endblock %}

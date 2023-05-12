@@ -1,0 +1,12 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Medicament{% endblock %}
+
+{% block body %}
+<div style="margin-left:280px; width:80%;" >
+    </div>
+
+    {{ include('admin_medicament/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_medicament_index') }}">back to list</a>
+{% endblock %}

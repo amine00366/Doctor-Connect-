@@ -1,0 +1,23 @@
+ 
+
+<div class="container">
+ 
+    <div class="col-md-7 mx-10">
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table>   
+   <div class="form-group">  
+ <div class="form-group">
+ {{ form_label(form.IdConsultation,"Id de consultation") }} 
+ {{ form_widget(form.IdConsultation, {'attr':{'class':'form-control','placeholder': 'Exemple : 2'}})}} 
+</div>
+<div class="form-group">
+ {{ form_label(form.note,"Note") }} 
+ {{ form_widget(form.note, {'attr':{'class':'form-control','placeholder': 'Exemple : 20'}})}} 
+</div>
+
+</table>
+     <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Fiche index{% endblock %}
+
+{% block body %}
+ 
+  {% block stylesheets %}
+    {{ parent() }}
+    <style>
+     .container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+table {
+  width: 20%;
+}
+
+      
+       </style>
+{% endblock %}
+  <div style="margin-left: 280px; width: 80%">
+
+ <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Fiche Patient</h1> </div>
+    <div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td>{{ fiche.id }}</td>
+                <td>{{ fiche.note }}</td>
+                <td>
+                    <a href="{{ path('app_fiche_admin_show', {'id': fiche.id}) }}">show</a>
+                    <a href="{{ path('app_fiche_admin_edit', {'id': fiche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+    <a href="{{ path('app_fiche_admin_new') }}">Create new</a>
+ </div> 
+{% endblock %}

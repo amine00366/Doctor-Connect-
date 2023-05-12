@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultation index{% endblock %}
+
+{% block body %}
+       <div class="  p-1 text-center"> <h1  class=" mb-3 text-primary ">Liste Ordonnances</h1> </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Etat_Consultation</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for consultation in consultations %}
+            <tr>
+                <td>{{ consultation.id }}</td>
+                <td>{{ consultation.etatConsultation }}</td>
+                <td>{{ consultation.dateDebut ? consultation.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ consultation.dateFin ? consultation.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_consultation_show', {'id': consultation.id}) }}">show</a>
+                    <a href="{{ path('app_consultation_edit', {'id': consultation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_consultation_new') }}">Create new</a>
+    <div class="pagination">
+                            <style>
+                                .pagination {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .pagination a,
+                                .pagination span {
+                                    padding: 5px 10px;
+                                    margin: 0 5px;
+                                    border-radius: 5px;
+                                    text-decoration: none;
+                                    color: #333;
+                                    background-color: #f1f1f1;
+                                    border: 1px solid #ccc;
+                                }
+
+                                .pagination .active a,
+                                .pagination a:hover {
+                                    background-color: #333;
+                                    color: #fff;
+                                    border-color: #333;
+                                }
+                            </style>
+                                {{ knp_pagination_render(consultations) }}
+                        </div>
+{% endblock %}

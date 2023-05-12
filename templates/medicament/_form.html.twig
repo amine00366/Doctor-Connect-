@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<div class="form">
+    {{ form_row(form.nom) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.description) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.image) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.prix) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.id_categorie) }}
+    {{ form_errors(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

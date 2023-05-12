@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ordonnance{% endblock %}
+
+{% block body %}
+ 
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+    
+        <div class="card">
+            <div class="card-body">
+   <h1 class="mb-3 text-primary text-center my-105">Créer une Ordonnance</h1>
+
+    {{form_start(form)}}
+
+<div class="row text-center">
+<div class="col-md-4">
+<div class="form-group">
+    
+ {{ form_label(form.id_Consultation,"Id de consultation") }} 
+ {{ form_widget(form.id_Consultation, {'attr':{'class':'form-control','placeholder': 'Exemple : 2'}})}} 
+   {{ form_errors(form.id_Consultation)}} 
+
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+  
+ <!--{{ form_label(form.Nom_Medicament,"Nom des Medicamments") }} 
+  {{ form_widget(form.Nom_Medicament)}} 
+    {{ form_errors(form.Nom_Medicament)}} -->
+     {% for medicament in medicaments %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="medicament[]" id="medicament{{ medicament.nom }}" value="{{ medicament.nom }}">
+                <label class="form-check-label" for="medicament{{ medicament.nom }}">
+                    {{ medicament.nom }}
+                </label>
+            </div>
+       {% endfor %}
+
+ 
+</div>
+</div>
+ <div class="row text-center">
+ <div class="col-md-4">
+<div class="form-group">
+ {{ form_label(form.dose,"Dosage      (en milligramme)") }} 
+ {{ form_widget(form.dose, {'attr':{'class':'form-control','placeholder': 'Exemple : 20'}})}} 
+  {{ form_errors(form.dose)}} 
+  
+</div> 
+ </div>
+
+ 
+ 
+<div class="col-md-4">
+<div class="form-group">
+ {{ form_label(form.frequence," Frequence Fois/Jours") }} 
+ {{ form_widget(form.frequence, {'attr':{'class':'form-control','placeholder': 'Exemple : 2'}})}} 
+   {{ form_errors(form.frequence)}} 
+
+</div>
+</div>
+</div>
+ 
+<div class="col-md-4">
+<div class="form-group">
+  {{ form_label(form.date_creation,"Créer à ") }}
+{{ form_widget(form.date_creation  , { 'attr': {'class': 'datepicker'} }) }} 
+   {{ form_errors(form.date_creation)}} 
+
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+
+<th>Signature :</th>
+    <td><input  type="file" name="signature"></td>
+<!-- Reste du formulaire... -->
+ 
+   </div>
+</div>
+   
+{{ form_end(form) }}
+ <!-- Ajouter le script SignaturePad -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@1.6.1/dist/signature_pad.min.js"></script>
+
+<!-- Initialiser l'objet SignaturePad -->
+<script>
+var canvas = document.getElementById('signature');
+var signaturePad = new SignaturePad(canvas);
+
+// Ajouter un événement pour effacer la signature
+document.getElementById('clear-signature').addEventListener('click', function () {
+  signaturePad.clear();
+});
+</script>
+
+<!-- Ajouter un événement "submit" au formulaire -->
+<script>
+var form = document.getElementById('form');
+form.addEventListener('submit', function () {
+  // Récupérer la signature sous forme d'image
+  var signature = signaturePad.toDataURL();
+  
+  // Ajouter la signature au formulaire avant de le soumettre
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'signature';
+  input.value = signature;
+  form.appendChild(input);
+});
+</script>
+       <div> <button class="btn btn-primary mb-2"  type="submit" name="submit" id="submit">{{ button_label|default('Envoyer') }} </button>
+
+    <a href="{{ path('app_ordonnance_index') }}">   <-  Retourner à la liste </a>
+ </div>
+ 
+  <!--button class="btn"> {{ button_label|default('Save') }} </button -->
+<!--div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+    <div class="mr-auto">Date: {{ "now"|date("Y-m-d") }}</div>
+     <div class="ml-auto">Signature: ______________________</div>
+       
+    </div  >
+  </div>   </div -->
+ 
+  </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
