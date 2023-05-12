@@ -64,7 +64,6 @@ class DoctorController extends AbstractController
 
 
 
-    /////////////////////////////
 ////////// liste des rendez vous d'un médecin avec barre de recherche  
 /**
      * @Route("/listR/{id}", name="app_recherche") 
@@ -116,7 +115,6 @@ class DoctorController extends AbstractController
    
 
 
-///////////////////////////////////////////////////////////////////////////////////////
 
 ///////////// liste des patient avec tri 
 
@@ -169,7 +167,6 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
 
 
- //////////////////////////////////////////////////////////////////////////////////////////////
 // la liste des médecin 
     /**
      * @Route("/doctors", name="app_doctor_list")
@@ -249,17 +246,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
     }
 
 
-  /**
-     * @Route("/rech", name="rech_appointment", methods={"GET","POST"})
-     */
-    public function ajax()
-    {
-       
-
-        return $this->render('appointments/searchajax.html.twig', [
-           
-        ]);
-    }
+ 
     /**
      * @Route("/appointment/success", name="appointment_success")
      */
@@ -274,6 +261,8 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
     {
         return $this->render('appointment/error.html.twig');
     }
+    
+    
 //// liste pour user des rendez vous 
   
     /**
@@ -301,7 +290,6 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
 
 
- /////////// hedhi filtrage by type 
      #[Route('/listbyCat/{id}', name: 'List_By_type')]
      public function show(AppointmentRepository $appoinmentrepo,$id,PaginatorInterface $paginator,Request $request)
      {
@@ -325,7 +313,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
 
 
-//// hedhi statistique 
+// statistique 
      #[Route('/dash', name: 'stat', methods: ['GET', 'POST'])]
      public function statistiques(AppointmentRepository  $commandeRepository,MedicamentRepository $medicamentRepository,CategorieRepository $catrepo){
          // On va chercher toutes les catégories
@@ -338,7 +326,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
              $dates[] = $com['appointmentDate'];
              $commandeCount[] = $com['count'];
          }
-///////////////
+
          $med=$medicamentRepository->findAll();
          $cat=$catrepo->findAll();
          $nbm=0;
@@ -386,7 +374,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
              $dates[] = $com['appointmentDate'];
              $commandeCount[] = $com['count'];
          }
-///////////////
+
          $med=$medicamentRepository->findAll();
          $cat=$catrepo->findAll();
          $nbm=0;
@@ -439,7 +427,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
         ]);
     }
-
+// redirection des doctors 
      /**
      * @Route("/routefordoctor", name="routefordoctor")
      */
@@ -447,6 +435,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
     {
         return $this->render('basefordoctor.html.twig', []);
     }
+    // redirection de users 
      /**
      * @Route("/routeforuser", name="routeforuser")
      */
@@ -469,7 +458,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
         ]);
     }
 
- //Liste d'un médecin avec tri par date Final
+ //Liste d'un médecin avec tri par date
  #[Route('/listmedtri/{id}', name: 'app_store_dateTri')]
  public function liste(Request $request, AppointmentRepository $appointmentRepository, $id)
  {
@@ -541,7 +530,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
         return $this->redirectToRoute('app_home');
     }
 
-    //delete une reservation pour patient 
+    //delete une reservation pour  
     #[Route('/delete_reservation/{id}', name: 'delete_reservation')]
 
     public function deleteReservationAction(Request $request): Response
@@ -619,6 +608,11 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
             'form' => $form->createView(),
         ]);
     }
+    
+    
+    
+    
+    
       /**
   * @Route("/{id}/editdoctor", name="update-resdoc", methods={"GET","POST"})
       */
@@ -641,7 +635,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
 
 
-    /// calendrier 
+    /// calendrier  des tous les Rendez Vous 
     #[Route('/cal', name: 'app_cal', methods: ['GET'])]
     public function cal(AppointmentRepository $appointmentRepository)
     {
@@ -672,7 +666,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
 
 
 
-////// ajout d'un docteur avec un map 
+////// ajout d'un docteur avec un map API Map Box
     /**
      * @Route("/doctor/add", name="doctor_add")
      */
@@ -699,7 +693,7 @@ public function listepatient(Request $request, AppointmentRepository $appointmen
             return $this->redirectToRoute('app_doctor_list');
         }
 
-        $mapboxAccessToken = 'pk.eyJ1IjoiZmplcmJpIiwiYSI6ImNrdWp6bXJhdTE4MGwyd215bzhpb3c0OGYifQ.jW0ZovMg20DoAaiOtGkPhg';
+        $mapboxAccessToken = 'Votre map Box access token ';
 
         return $this->render('doctor/new.html.twig', [
             'form' => $form->createView(),
